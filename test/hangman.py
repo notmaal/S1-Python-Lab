@@ -84,7 +84,7 @@ while(is_running):
     displayword(word, guesses)                      # displaying _ and letters
 
     guess = input("Enter your guess: ").lower()
-    if guess == " ":
+    if not guess:
         print("Enter something bruh")
         time.sleep(1.2)         
         continue
