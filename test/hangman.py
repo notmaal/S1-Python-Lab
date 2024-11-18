@@ -65,6 +65,7 @@ def displayhangman(wrong_count):
         print(line)
 
 # ---------------------------------------------
+
 while 1:
     word = input("Enter the word: ")
     if not word or word.isspace():
@@ -94,18 +95,30 @@ while(is_running):
         time.sleep(1.2)         
         continue
     guess = clean(guess)
-    if guess == "exit":
-        print("Bruh you gave up (。_。)")                            # handling input
-        is_running = 0
-        break
-    elif len(guess) != 1:                                # word guessing
+    if len(guess) != 1:                                # word guessing
         if guess == word:
             print("Dayuuuummm YOU WON!!!")
             is_running = 0
             break
+        elif guess in list(word.split()):
+            count = 0
+            for letter in guess:
+                if letter not in guesses:
+                    guesses.append(letter)
+                else:
+                    count += 1
+            if len(guess) == count:
+                print("You already guessed it")
+            else:
+                print("Yes that word is valid (O.o)")
+            time.sleep(0.25)
         else:
             print("Arinjudengi enthina verthe ( ´_ゝ` )")
             wrong_count += 1
+    elif guess == "exit":
+        print("Bruh you gave up (。_。)")                            # handling input
+        is_running = 0
+        break
     elif guess in word:                                   # checking if guessed
         if guess in guesses:
             print("!!You already guessed it!!")
