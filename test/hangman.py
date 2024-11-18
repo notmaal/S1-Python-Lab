@@ -65,9 +65,14 @@ def displayhangman(wrong_count):
         print(line)
 
 # ---------------------------------------------
-
-word = input("Enter the word: ")
-word = clean(word)
+while 1:
+    word = input("Enter the word: ")
+    if not word or word.isspace():
+        print("Enter something bruh （︶^︶）")
+        continue
+    else:
+        word = clean(word)
+        break
 
 guesses = [" "]                    # aa extra " " for printing space in displayword()
 wrong_guesses = []
@@ -84,7 +89,7 @@ while(is_running):
     displayword(word, guesses)                      # displaying _ and letters
 
     guess = input("Enter your guess: ").lower()
-    if not guess:
+    if not guess or guess.isspace():
         print("Enter something bruh")
         time.sleep(1.2)         
         continue
