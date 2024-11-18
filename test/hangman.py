@@ -2,7 +2,7 @@ import os, time
 
 def displayword(word, guesses):
     for letter in word:
-        if letter in guesses:
+        if letter in guesses or letter.isspace():
             print(letter, end=" ")
         else:
             print("_", end=" ")
@@ -75,7 +75,7 @@ while 1:
         word = clean(word)
         break
 
-guesses = [" "]                    # aa extra " " for printing space in displayword()
+guesses = [] 
 wrong_guesses = []
 wrong_count = 0
 
@@ -97,11 +97,10 @@ while(is_running):
     guess = clean(guess)
     if len(guess) != 1:                                # word guessing
         if guess == word:
-            print("Dayuuuummm YOU WON!!!")
             is_running = 0
             break
         elif guess in list(word.split()):
-            count = 0
+            count = 0                                  # to check if already guessed
             for letter in guess:
                 if letter not in guesses:
                     guesses.append(letter)
@@ -113,8 +112,14 @@ while(is_running):
                 print("Yes that word is valid (O.o)")
             time.sleep(0.25)
         else:
-            print("Arinjudengi enthina verthe ( ´_ゝ` )")
-            wrong_count += 1
+            for letter in guess:                                 # to handle condition when guessed word is incorrect
+                if letter in word:
+                    if letter not in guesses:
+                        guesses.append(letter)
+                else:
+                    if letter not in wrong_guesses:
+                        wrong_guesses.append(letter)
+                        wrong_count += 1
     elif guess == "exit":
         print("Bruh you gave up (。_。)")                            # handling input
         is_running = 0
@@ -125,15 +130,17 @@ while(is_running):
         else:
             guesses.append(guess)
             print("Nice :)")
-    else:
+    else:                                                  # handling single letter wrong guesses
         if guess not in wrong_guesses:
             wrong_guesses.append(guess)
-        wrong_count += 1
+            wrong_count += 1
         print("You Guessed Wrong :(")
 
-
-    if len(set(word)) - 1 == len(guesses):                   # checking exit condition ( -1 for " " in word )
-        print("You WON!!!")
+    if len(list(word.split())) > 1:
+        if len(set(word)) -1 == len(guesses):         # checking exit condition ( -1 for " " in word )
+            is_running = 0
+            break
+    elif len(set(word)) == len(guesses):                   
         is_running = 0
         break
     if wrong_count == 7:
@@ -143,3 +150,6 @@ while(is_running):
         break
 
     time.sleep(0.75)            # waiting
+
+os.system('cls')
+print(f"The word is:{word}\nYOU WON!!!")
