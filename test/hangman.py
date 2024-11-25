@@ -78,6 +78,7 @@ while 1:
 guesses = [] 
 wrong_guesses = []
 wrong_count = 0
+won = 1
 
 is_running = 1
 while(is_running):
@@ -144,12 +145,15 @@ while(is_running):
         is_running = 0
         break
     if wrong_count == 7:
-        print("You LOST :( ")
-        print(f"The correct answer was {"".join(word)}")
+        won = 0
         is_running = 0
         break
 
     time.sleep(0.75)            # waiting
-
-os.system('cls')
-print(f"The word is:{word}\nYOU WON!!!")
+if won:
+    os.system('cls')
+    print(f"The word is:{word}\nYOU WON!!!")
+else:
+    print("You LOST!! ")
+    print(f"The correct answer was {"".join(word)}")
+time.sleep(1.5)
