@@ -30,8 +30,8 @@ if __name__ == "__main__":
     print(f"The perimeter of second rectangle is: {rectangle2.perimeter()}\n")
     
     if(rectangle1.area() < rectangle2.area()):
-        print("The first rectangle has more area than the second")
-    elif(rectangle1.area() > rectangle2.area()):
         print("The second rectangle has more area than the first")
+    elif(rectangle1.area() > rectangle2.area()):
+        print("The first rectangle has more area than the second")
     else:
         print("Both the rectangles have same area")
