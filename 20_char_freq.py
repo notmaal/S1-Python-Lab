@@ -1,5 +1,5 @@
-text = input("Enter the string: ")
-c = input("Enter the character: ")
+text = input("Enter the string: ").lower()
+c = input("Enter the character: ").lower()
 count = 0
 for char in text:
     if char == c:
